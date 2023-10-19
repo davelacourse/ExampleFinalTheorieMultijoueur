@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
@@ -9,7 +7,6 @@ using Unity.Services.Core;
 using ParrelSync;
 #endif
 
-
 public class AuthentificationManager : MonoBehaviour
 {
     private void Awake()
@@ -17,6 +14,7 @@ public class AuthentificationManager : MonoBehaviour
         Login();
     }
 
+    // identifier comme méthode asynchrone afin d'utiliser le await 
     public async void Login()
     {
         // Variables qui contient les options d'initialisation
@@ -27,15 +25,20 @@ public class AuthentificationManager : MonoBehaviour
 #if UNITY_EDITOR
         if (ClonesManager.IsClone())
         {
+            // Si c'est un close de l'éditeur on reçoit l'info sur ce clone
             options.SetProfile(ClonesManager.GetArgument());
         }
         else
         {
+            // Si ce n'est pas le clone on place le profile à primary
             options.SetProfile("primary");
         }
 #endif
-
+        // await nous assure que l'initialisation est terminé avant de poursuivre
+        // ici je passe les options à l'initialisation pour savoir s'il s'agit du 
+        // clone ou non
         await UnityServices.InitializeAsync(options);
+        // même principe pour le signin
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
     }
 }
