@@ -2,11 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
 
-public class NetworkUI : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     // Représente les 3 boutons de notre scène
     [SerializeField] private Button hostButton = default;
-    [SerializeField] private Button serverButton = default;
+    // [SerializeField] private Button serverButton = default;
     [SerializeField] private Button clientButton = default;
 
     [SerializeField] private string _joinCode;  // Solution temporaire pour se brancher comme client
