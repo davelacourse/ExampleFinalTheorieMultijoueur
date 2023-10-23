@@ -4,6 +4,7 @@ using Unity.Netcode.Transports.UTP;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using Unity.Networking.Transport.Relay;
+using System.Threading.Tasks;
 
 public class RelayManager : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class RelayManager : MonoBehaviour
     // Méthode qui sera appeler pour définir les paramètres de connexion au Relay
     // maxPLayers représente le nombre maximum de joueurs qui se connecte
     // en même temps à notre partie
-    public async void CreateRelayGame(int maxPlayer)
+    public async Task<string> CreateRelayGame(int maxPlayer)
     {
         // Permet d'avoir une allocation sur le relais avec le nombre de joueurs reçu
         Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxPlayer);
@@ -38,6 +39,8 @@ public class RelayManager : MonoBehaviour
             allocation.ConnectionData);
         //Démarrer le Host
         NetworkManager.Singleton.StartHost();
+
+        return joinCode;
     }
 
     // Méthode qui prendre de faire la connexion avec le Relay
@@ -55,3 +58,4 @@ public class RelayManager : MonoBehaviour
         NetworkManager.Singleton.StartClient();
     }
 }
+

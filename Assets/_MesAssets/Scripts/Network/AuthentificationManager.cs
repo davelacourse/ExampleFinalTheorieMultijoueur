@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
+using UnityEngine.Events;
 
 // Pour tester en local avec ParrelSync on ajoute la librairie
 #if UNITY_EDITOR
@@ -9,8 +10,13 @@ using ParrelSync;
 
 public class AuthentificationManager : MonoBehaviour
 {
+    public static AuthentificationManager Instance;  // Création Singleton
+    
+    public UnityEvent SignIn;  // Petmet l'appel du Event de l'extérieur
+    
     private void Awake()
     {
+        Instance = this; // Singleton
         Login();
     }
 
@@ -40,5 +46,6 @@ public class AuthentificationManager : MonoBehaviour
         await UnityServices.InitializeAsync(options);
         // même principe pour le signin
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        SignIn?.Invoke();  // Déclenche l'évènement SignIn
     }
 }
