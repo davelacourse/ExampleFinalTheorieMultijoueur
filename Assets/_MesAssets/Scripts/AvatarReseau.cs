@@ -11,28 +11,21 @@ public class AvatarReseau : NetworkBehaviour
     [SerializeField] private Transform _leftHandAvatar = default;  // LeftHand
     [SerializeField] private Transform _rightHandAvatar = default;  // RightHand
 
-    private PositionsVRRig _positionsVRRig;
-
-    private void Start()
-    {
-        _positionsVRRig = FindObjectOfType<PositionsVRRig>();
-    }
-
     private void Update()
     {
         if (IsOwner)
         {
-            _rootAvatar.position = _positionsVRRig.Root.position;
-            _rootAvatar.rotation = _positionsVRRig.Root.rotation;
+            _rootAvatar.position = PositionsVRRig.Instance.Root.position;
+            _rootAvatar.rotation = PositionsVRRig.Instance.Root.rotation;
 
-            _headAvatar.position = _positionsVRRig.Head.position;
-            _headAvatar.rotation = _positionsVRRig.Head.rotation;
+            _headAvatar.position = PositionsVRRig.Instance.Head.position;
+            _headAvatar.rotation = PositionsVRRig.Instance.Head.rotation;
 
-            _leftHandAvatar.position = _positionsVRRig.LeftHand.position;
-            _leftHandAvatar.rotation = _positionsVRRig.LeftHand.rotation;
+            _leftHandAvatar.position = PositionsVRRig.Instance.LeftHand.position;
+            _leftHandAvatar.rotation = PositionsVRRig.Instance.LeftHand.rotation;
 
-            _rightHandAvatar.position = _positionsVRRig.RightHand.position;
-            _rightHandAvatar.rotation = _positionsVRRig.RightHand.rotation;
+            _rightHandAvatar.position = PositionsVRRig.Instance.RightHand.position;
+            _rightHandAvatar.rotation = PositionsVRRig.Instance.RightHand.rotation;
         }
     }
 }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PositionsVRRig : MonoBehaviour
-{
+{   
+    public static PositionsVRRig Instance;
+    
     // Attributs qui servent à contenir la position de l'équipement de VR
     [SerializeField] private Transform _root = default;  // XR Origin
     public Transform Root => _root;
@@ -16,4 +18,9 @@ public class PositionsVRRig : MonoBehaviour
 
     [SerializeField] private Transform _rightHand = default;  // RightHand
     public Transform RightHand => _rightHand;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 }

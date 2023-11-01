@@ -14,7 +14,13 @@ public class UICreateLobby : MonoBehaviour
         _btnCreateLobby.onClick.AddListener(CreateLobbyFromUI);
         ModifierTexteNbJoueurs();
     }
-    
+
+    private void Update()
+    {
+        // Rends le bouton actif seulement s'il y a du texte dans le input field
+        _btnCreateLobby.gameObject.SetActive(_inputNomLobby.text.Trim() != "");
+    }
+
     public void ModifierTexteNbJoueurs()
     {
         _txtNbJoueurs.text = "Joueurs : " + _sliderNbJoueurs.value.ToString();
